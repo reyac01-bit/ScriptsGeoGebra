@@ -22,7 +22,7 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <h1>Scripts en vivo con GeoGebra</h1>
 <p>Explore cuatro casos: derivada, sumas de Riemann, autovectores y simulación binomial. En cada pestaña, espere a que cargue GeoGebra y pulse <b>Construir y verificar</b>. Después utilice los controles de la construcción o los botones <b>Ejecutar</b> de los scripts.</p>
 <p class="legend">✓ efecto comprobado · ✗ discrepancia · ⌛ carga pendiente · ? efecto no comprobado. Puede consultar las instrucciones ejecutadas y sus resultados en el <b>Registro de ejecución</b> de cada caso.</p>
-<p class="note">Este recurso requiere conexión a internet para cargar GeoGebra. Puede utilizarlo en línea o descargar el archivo y abrirlo en un navegador. Si alguna instrucción queda pendiente de carga, espere unos segundos y pulse <b>Completar construcción</b>. En pantallas pequeñas, desplace horizontalmente el área gráfica para ver todos sus controles.</p>
+<p class="note">Este recurso requiere conexión a internet para cargar . Puede utilizarlo en línea o descargar el archivo y abrirlo en un navegador. Si alguna instrucción queda pendiente de carga, espere unos segundos y pulse <b>Completar construcción</b>. En pantallas pequeñas, desplace horizontalmente el área gráfica para ver todos sus controles.</p>
 </header><nav role="tablist" aria-label="Cuatro casos matemáticos">
 <button id="tab-derivada" role="tab" aria-selected="true" aria-controls="caso-derivada" tabindex="0" data-caso="derivada">1 · Derivada</button>
 <button id="tab-riemann" role="tab" aria-selected="false" aria-controls="caso-riemann" tabindex="-1" data-caso="riemann">2 · Sumas de Riemann</button>
@@ -31,17 +31,17 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 </nav><main>
 <section id="caso-derivada" role="tabpanel" aria-labelledby="tab-derivada" class="caso activo">
 <div class="applet"><h2>De la secante a la tangente</h2><p class="pista">Mueva xB, pulse Acercar B y registre una conjetura. Este ejemplo usa f(x) = x³/6 − x + 1 y a = 1 fijos; el acercamiento es por la derecha.</p>
-<div class="load-status" id="estado-derivada" role="status">Preparando GeoGebra…</div>
+<div class="load-status" id="estado-derivada" role="status">Preparando …</div>
 <div class="toolbar build-controls"><button data-build="derivada" disabled>Construir y verificar</button><button data-pending="derivada" disabled>Completar construcción</button></div>
 <p class="summary" id="resumen-derivada">Pulse Construir y verificar para preparar este caso.</p><p class="first-error" id="primer-error-derivada" hidden></p>
 <div class="ggb-wrap"><div class="ggb" id="ggb-derivada"></div></div>
 <div class="readout"><p class="message" id="mensaje-derivada">Esperando la carga.</p><p class="metrics" id="metricas-derivada"></p><p id="detalle-derivada"></p><p class="normal-note" id="nota-derivada"></p></div>
 <p class="legend">Azul: función · Naranja: secante · Verde: tangente</p>
 <div class="toolbar"><button data-check="derivada" disabled>Verificar estado</button></div><p class="note">Una conjetura no vacía revela el límite; su contenido no se califica. El acercamiento por un solo lado no demuestra la existencia de la derivada.</p>
-</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a GeoGebra. Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
+</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a . Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
 <div class="bloques" id="bloques-derivada"></div>
 <details id="construccion-derivada"><summary>Construcción base: resultados por instrucción</summary><p class="note">Objetos necesarios antes de asociar los scripts. Los valores que reciben SetValue se crean libres; las fórmulas dependientes se actualizan por sus dependencias.</p><div id="base-derivada"></div></details>
-<details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="derivada">Guardar registro</button></header><ol id="consola-derivada" aria-label="Registro de comandos de derivada"></ol></div>
+<details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a , sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="derivada">Guardar registro</button></header><ol id="consola-derivada" aria-label="Registro de comandos de derivada"></ol></div>
 </details></div></section>
 <section id="caso-riemann" role="tabpanel" aria-labelledby="tab-riemann" class="caso " hidden>
 <div class="applet"><h2>Refinar, registrar y comparar</h2><p class="pista">Para f(x) = x² + 1 en [0, 2], estime la integral y confirme con Intro. Seleccione 1 (izquierda), 2 (derecha) o 3 (punto medio); después pulse Refinar ×2.</p>
@@ -52,7 +52,7 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <div class="readout"><p class="message" id="mensaje-riemann">Esperando la carga.</p><p class="metrics" id="metricas-riemann"></p><p id="detalle-riemann"></p><p class="normal-note" id="nota-riemann"></p></div>
 <p class="legend">Azul: función · Naranja: rectángulos del método seleccionado</p><div class="history-wrap"><table class="history"><caption>Refinamientos registrados · método actual</caption><thead><tr><th scope="col">n</th><th scope="col">Suma</th><th scope="col">S − I</th></tr></thead><tbody id="tabla-riemann"><tr><td colspan="3">Todavía no hay refinamientos.</td></tr></tbody></table></div>
 <div class="toolbar"><button data-check="riemann" disabled>Verificar estado</button></div><p class="note">La tabla conserva cada refinamiento efectivo. Al cambiar de método se vacía para no mezclar sumas distintas. La función y los extremos son fijos en este ejemplo.</p>
-</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a GeoGebra. Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
+</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a . Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
 <div class="bloques" id="bloques-riemann"></div>
 <details id="construccion-riemann"><summary>Construcción base: resultados por instrucción</summary><p class="note">Objetos necesarios antes de asociar los scripts. Los valores que reciben SetValue se crean libres; las fórmulas dependientes se actualizan por sus dependencias.</p><div id="base-riemann"></div></details>
 <details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="riemann">Guardar registro</button></header><ol id="consola-riemann" aria-label="Registro de comandos de riemann"></ol></div>
@@ -86,7 +86,7 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="binomial">Guardar registro</button></header><ol id="consola-binomial" aria-label="Registro de comandos de binomial"></ol></div>
 </details></div></section>
 </main><footer>
-<p>Material complementario de <i>Programación didáctica con scripts en GeoGebra: diseño de tareas dinámicas para matemática universitaria</i>. Cuatro casos interactivos · versión 1.0 · octubre de 2026.</p>
+<p>Material complementario de <i>Aprender a programar en GeoGebra con apoyo de inteligencia artificial generativa: una propuesta didáctica para docentes de matemática</i>. Cuatro casos interactivos · versión 1.0 · octubre de 2026.</p>
 <details><summary>Cómo interpretar la verificación</summary>
 <p>La marca ✓ indica que se comprobó el efecto previsto de una instrucción. En la construcción base se comprueba la existencia del objeto creado. Los comandos aleatorios se verifican por la forma y el rango de los resultados, sin generar una segunda muestra.</p>
 <p>El botón <b>Verificar estado</b> contrasta relaciones matemáticas de la construcción. Estos controles no califican las conjeturas ni demuestran la eficacia didáctica del recurso. Cuando aparece una discrepancia, el registro permite identificar la instrucción afectada.</p>
