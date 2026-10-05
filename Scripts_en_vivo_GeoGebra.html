@@ -1,6 +1,6 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Scripts en vivo con GeoGebra · cuatro casos</title><style>
+<title>Scripts en vivo con GeoGebra · Derivada y Binomial</title><style>
 :root{--ink:#172b42;--muted:#536373;--line:#d9e1e8;--blue:#245ba8;--ok:#167342;--bad:#b42b25;--panel:#f4f7fa;--mark:#ffe68a}
 *{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,Segoe UI,sans-serif;color:var(--ink);background:#fff}
 body>header{padding:22px 28px 14px;max-width:1450px;margin:auto}h1{font-size:25px;line-height:1.2;margin:0 0 10px}h2{font-size:18px;margin:0 0 7px}p{margin:7px 0 12px}button,select{font:inherit}button{border:1px solid #b3bfcc;border-radius:6px;background:white;color:var(--ink);padding:6px 11px;cursor:pointer}button:hover{background:#eef4fb}button:disabled{opacity:.5;cursor:wait}button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #316fbc;outline-offset:3px}.muted{color:var(--muted)}code,.cmd{font-family:ui-monospace,Consolas,monospace}nav{display:flex;gap:8px;padding:0 28px;max-width:1450px;margin:auto}nav button{border-radius:7px 7px 0 0;padding:10px 14px}nav button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}main{border-top:1px solid var(--line);max-width:1450px;margin:auto}.caso{display:none;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.caso.activo{display:grid}.applet{padding:18px;border-right:1px solid var(--line);min-width:0}.guion{padding:18px;min-width:0}.pista{font-size:14px;color:var(--muted)}.ggb-wrap{width:100%;min-width:0;overflow:auto}.ggb{width:660px;height:590px;min-height:590px}.load-status{padding:8px 0;color:var(--muted)}.load-status.error{color:var(--bad)}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}.bloques{max-height:670px;overflow:auto;padding:2px 4px 8px 0}.bloque{border:1px solid var(--line);border-radius:7px;margin:0 0 12px;overflow:hidden}.bloque header{padding:9px 11px;background:var(--panel);display:flex;align-items:center;justify-content:space-between;gap:8px}.bloque header small{display:block;color:var(--muted)}.bloque header button{font-size:13px}.cmd{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;padding:4px 11px}.cmd.activa{background:var(--mark)}.cmd.ok:before{content:'✓ ';color:var(--ok)}.cmd.pending:before{content:"⌛ ";color:#765b00}.cmd.unknown:before{content:"? ";color:#765b00}.cmd.bad:before{content:'✗ ';color:var(--bad)}.console{border-top:1px solid var(--line);margin-top:12px;background:var(--panel)}.console header{display:flex;justify-content:space-between;padding:9px 10px;align-items:center;gap:8px}.console ol{font:12px/1.5 ui-monospace,Consolas,monospace;list-style:none;padding:8px 10px;margin:0;height:200px;overflow:auto;overflow-wrap:anywhere}.ok{color:var(--ok)}.bad{color:var(--bad)}.ev{color:var(--blue)}.readout{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}.readout p{margin:4px 0}.message{font-weight:600}.metrics{font-variant-numeric:tabular-nums}.legend{font-size:13px}.legend span{margin-right:13px}.blue{color:#2850aa}.orange{color:#b95c00}.green{color:#16823c}.normal-note{font-size:13px;color:#714d00}.limit{color:#176a38}.note{font-size:13px;color:var(--muted)}details{margin-top:12px}summary{cursor:pointer}details pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--panel);padding:12px;max-height:320px;overflow:auto}footer{max-width:1450px;margin:0 auto;padding:18px 28px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.first-error{border:1px solid #b42b25;background:#fff1ef;color:#8d231e;padding:10px;overflow-wrap:anywhere;font-size:13px}.pending,.unknown{color:#765b00}.build-controls{padding:10px 0}.build-controls button:first-child{background:#245ba8;color:#fff}.summary{font-size:13px;font-weight:600}a{color:var(--blue)}[hidden]{display:none!important}
@@ -20,14 +20,12 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <header>
 <div class="source-tag">SCRIPT-GG · MATERIAL COMPLEMENTARIO</div>
 <h1>Scripts en vivo con GeoGebra</h1>
-<p>Explore cuatro casos: derivada, sumas de Riemann, autovectores y simulación binomial. En cada pestaña, espere a que cargue GeoGebra y pulse <b>Construir y verificar</b>. Después utilice los controles de la construcción o los botones <b>Ejecutar</b> de los scripts.</p>
+<p>Explore dos casos: derivada y simulación binomial. En cada pestaña, espere a que cargue GeoGebra y pulse <b>Construir y verificar</b>. Después utilice los controles de la construcción o los botones <b>Ejecutar</b> de los scripts.</p>
 <p class="legend">✓ efecto comprobado · ✗ discrepancia · ⌛ carga pendiente · ? efecto no comprobado. Puede consultar las instrucciones ejecutadas y sus resultados en el <b>Registro de ejecución</b> de cada caso.</p>
 <p class="note">Este recurso requiere conexión a internet para cargar GeoGebra. Puede utilizarlo en línea o descargar el archivo y abrirlo en un navegador. Si alguna instrucción queda pendiente de carga, espere unos segundos y pulse <b>Completar construcción</b>. En pantallas pequeñas, desplace horizontalmente el área gráfica para ver todos sus controles.</p>
-</header><nav role="tablist" aria-label="Cuatro casos matemáticos">
-<button id="tab-derivada" role="tab" aria-selected="true" aria-controls="caso-derivada" tabindex="0" data-caso="derivada">1 · Derivada</button>
-<button id="tab-riemann" role="tab" aria-selected="false" aria-controls="caso-riemann" tabindex="-1" data-caso="riemann">2 · Sumas de Riemann</button>
-<button id="tab-autovectores" role="tab" aria-selected="false" aria-controls="caso-autovectores" tabindex="-1" data-caso="autovectores">3 · Autovectores</button>
-<button id="tab-binomial" role="tab" aria-selected="false" aria-controls="caso-binomial" tabindex="-1" data-caso="binomial">4 · Binomial</button>
+</header><nav role="tablist" aria-label="Derivada y Binomial">
+<button id="tab-derivada" role="tab" aria-selected="true" aria-controls="caso-derivada" tabindex="0" data-caso="derivada">Derivada</button>
+<button id="tab-binomial" role="tab" aria-selected="false" aria-controls="caso-binomial" tabindex="-1" data-caso="binomial">Binomial</button>
 </nav><main>
 <section id="caso-derivada" role="tabpanel" aria-labelledby="tab-derivada" class="caso activo">
 <div class="applet"><h2>De la secante a la tangente</h2><p class="pista">Mueva xB, pulse Acercar B y registre una conjetura. Este ejemplo usa f(x) = x³/6 − x + 1 y a = 1 fijos; el acercamiento es por la derecha.</p>
@@ -42,34 +40,6 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <div class="bloques" id="bloques-derivada"></div>
 <details id="construccion-derivada"><summary>Construcción base: resultados por instrucción</summary><p class="note">Objetos necesarios antes de asociar los scripts. Los valores que reciben SetValue se crean libres; las fórmulas dependientes se actualizan por sus dependencias.</p><div id="base-derivada"></div></details>
 <details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="derivada">Guardar registro</button></header><ol id="consola-derivada" aria-label="Registro de comandos de derivada"></ol></div>
-</details></div></section>
-<section id="caso-riemann" role="tabpanel" aria-labelledby="tab-riemann" class="caso " hidden>
-<div class="applet"><h2>Refinar, registrar y comparar</h2><p class="pista">Para f(x) = x² + 1 en [0, 2], estime la integral y confirme con Intro. Seleccione 1 (izquierda), 2 (derecha) o 3 (punto medio); después pulse Refinar ×2.</p>
-<div class="load-status" id="estado-riemann" role="status">Abra esta pestaña para cargar el applet.</div>
-<div class="toolbar build-controls"><button data-build="riemann" disabled>Construir y verificar</button><button data-pending="riemann" disabled>Completar construcción</button></div>
-<p class="summary" id="resumen-riemann">Pulse Construir y verificar para preparar este caso.</p><p class="first-error" id="primer-error-riemann" hidden></p>
-<div class="ggb-wrap"><div class="ggb" id="ggb-riemann"></div></div>
-<div class="readout"><p class="message" id="mensaje-riemann">Esperando la carga.</p><p class="metrics" id="metricas-riemann"></p><p id="detalle-riemann"></p><p class="normal-note" id="nota-riemann"></p></div>
-<p class="legend">Azul: función · Naranja: rectángulos del método seleccionado</p><div class="history-wrap"><table class="history"><caption>Refinamientos registrados · método actual</caption><thead><tr><th scope="col">n</th><th scope="col">Suma</th><th scope="col">S − I</th></tr></thead><tbody id="tabla-riemann"><tr><td colspan="3">Todavía no hay refinamientos.</td></tr></tbody></table></div>
-<div class="toolbar"><button data-check="riemann" disabled>Verificar estado</button></div><p class="note">La tabla conserva cada refinamiento efectivo. Al cambiar de método se vacía para no mezclar sumas distintas. La función y los extremos son fijos en este ejemplo.</p>
-</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a GeoGebra. Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
-<div class="bloques" id="bloques-riemann"></div>
-<details id="construccion-riemann"><summary>Construcción base: resultados por instrucción</summary><p class="note">Objetos necesarios antes de asociar los scripts. Los valores que reciben SetValue se crean libres; las fórmulas dependientes se actualizan por sus dependencias.</p><div id="base-riemann"></div></details>
-<details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="riemann">Guardar registro</button></header><ol id="consola-riemann" aria-label="Registro de comandos de riemann"></ol></div>
-</details></div></section>
-<section id="caso-autovectores" role="tabpanel" aria-labelledby="tab-autovectores" class="caso " hidden>
-<div class="applet"><h2>Buscar direcciones invariantes</h2><p class="pista">Arrastre P sobre la circunferencia. Compare v con Av, genere matrices o pruebe la rotación. El campo A permite editar las cuatro entradas con el formato {{2,1},{1,2}}.</p>
-<div class="load-status" id="estado-autovectores" role="status">Abra esta pestaña para cargar el applet.</div>
-<div class="toolbar build-controls"><button data-build="autovectores" disabled>Construir y verificar</button><button data-pending="autovectores" disabled>Completar construcción</button></div>
-<p class="summary" id="resumen-autovectores">Pulse Construir y verificar para preparar este caso.</p><p class="first-error" id="primer-error-autovectores" hidden></p>
-<div class="ggb-wrap"><div class="ggb" id="ggb-autovectores"></div></div>
-<div class="readout"><p class="message" id="mensaje-autovectores">Esperando la carga.</p><p class="metrics" id="metricas-autovectores"></p><p id="detalle-autovectores"></p><p class="normal-note" id="nota-autovectores"></p></div>
-<p class="legend">Azul: v · Naranja: Av · Gris: circunferencia unitaria</p>
-<div class="toolbar"><button data-check="autovectores" disabled>Verificar estado</button></div><p class="note">El umbral de 2° identifica candidatos, no demuestra la igualdad Av = λv. Examine el residuo. Si Av ≈ 0, el candidato es λ = 0.</p>
-</div><div class="guion"><h2>Scripts ejecutables · objeto y evento</h2><p class="note">Cada línea visible es la instrucción enviada a GeoGebra. Los rótulos no son comandos. El resaltado recorre visualmente el bloque después de su ejecución en orden.</p>
-<div class="bloques" id="bloques-autovectores"></div>
-<details id="construccion-autovectores"><summary>Construcción base: resultados por instrucción</summary><p class="note">Objetos necesarios antes de asociar los scripts. Los valores que reciben SetValue se crean libres; las fórmulas dependientes se actualizan por sus dependencias.</p><div id="base-autovectores"></div></details>
-<details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="autovectores">Guardar registro</button></header><ol id="consola-autovectores" aria-label="Registro de comandos de autovectores"></ol></div>
 </details></div></section>
 <section id="caso-binomial" role="tabpanel" aria-labelledby="tab-binomial" class="caso " hidden>
 <div class="applet"><h2>De frecuencias a probabilidades</h2><p class="pista">Ajuste n, p y N; formule una predicción y pulse Simular. Al cambiar un parámetro se borra la muestra anterior. k selecciona la probabilidad acumulada.</p>
@@ -86,12 +56,12 @@ nav{flex-wrap:wrap} .source-tag{font-size:12px;letter-spacing:.04em;color:var(--
 <details class="execution-record"><summary>Registro de ejecución</summary><p class="note">Consulte los comandos enviados a GeoGebra, sus resultados y las incidencias. Las repeticiones se agrupan y el primer error se conserva. Puede descargar el registro para revisar la ejecución.</p><div class="console"><header><span>Comandos y resultados</span><button data-export="binomial">Guardar registro</button></header><ol id="consola-binomial" aria-label="Registro de comandos de binomial"></ol></div>
 </details></div></section>
 </main><footer>
-<p>Material complementario de <i>Aprender a programar en GeoGebra con apoyo de inteligencia artificial generativa: una propuesta didáctica para docentes de matemática</i>. Cuatro casos interactivos · versión 1.0 · octubre de 2026.</p>
+<p>Material complementario de <i>Aprender a programar en GeoGebra con apoyo de inteligencia artificial generativa: una propuesta didáctica para docentes de matemática</i>. Derivada y binomial · versión 1.0 · octubre de 2026.</p>
 <details><summary>Cómo interpretar la verificación</summary>
 <p>La marca ✓ indica que se comprobó el efecto previsto de una instrucción. En la construcción base se comprueba la existencia del objeto creado. Los comandos aleatorios se verifican por la forma y el rango de los resultados, sin generar una segunda muestra.</p>
 <p>El botón <b>Verificar estado</b> contrasta relaciones matemáticas de la construcción. Estos controles no califican las conjeturas ni demuestran la eficacia didáctica del recurso. Cuando aparece una discrepancia, el registro permite identificar la instrucción afectada.</p>
 <p>Los scripts se muestran junto con su objeto y evento. Para reproducir un caso en GeoGebra, consulte también el apartado <b>Construcción base</b>. Los rótulos que identifican objetos y eventos no forman parte del código.</p>
-<p>Documentación de GeoGebra: <a href="https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_API/" target="_blank" rel="noopener noreferrer">API</a> · <a href="https://geogebra.github.io/docs/manual/en/commands/SetValue/" target="_blank" rel="noopener noreferrer">SetValue</a> · <a href="https://geogebra.github.io/docs/manual/en/commands/RectangleSum/" target="_blank" rel="noopener noreferrer">RectangleSum</a>.</p>
+<p>Documentación de GeoGebra: <a href="https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_API/" target="_blank" rel="noopener noreferrer">API</a> · <a href="https://geogebra.github.io/docs/manual/en/commands/SetValue/" target="_blank" rel="noopener noreferrer">SetValue</a>.</p>
 </details></footer><script>
 (() => {
 "use strict";
@@ -210,314 +180,6 @@ const CASOS = {
         ],
         "targets": [
           "conjetura"
-        ]
-      }
-    ]
-  },
-  "riemann": {
-    "coord": [
-      -0.45,
-      3.5,
-      -0.8,
-      7.2
-    ],
-    "construccion": [
-      "f(x) = x^2 + 1",
-      "a = 0",
-      "b = 2",
-      "n = Slider(1, 512, 1, 1, 230, false, true, false, false)",
-      "SetValue(n, 4)",
-      "tipo = Slider(1, 3, 1, 1, 230, false, true, false, false)",
-      "SetValue(tipo, 1)",
-      "S_izq = RectangleSum(f, a, b, n, 0)",
-      "S_der = RectangleSum(f, a, b, n, 1)",
-      "S_med = RectangleSum(f, a, b, n, 0.5)",
-      "I = Integral(f, a, b)",
-      "S = 0",
-      "fase = 0",
-      "estim = 0",
-      "registro = {}",
-      "pasoN = 4",
-      "errorS = S - I",
-      "campoEstim = InputBox(estim)",
-      "mensaje = \"\"",
-      "botReiniciar = Button(\"Reiniciar\")",
-      "botRefinar = Button(\"Refinar ×2\")",
-      "botReducir = Button(\"Reducir ÷2\")",
-      "botRegistrar = Button(\"Registrar estimación\")"
-    ],
-    "libres": [
-      "n",
-      "tipo",
-      "S",
-      "fase",
-      "estim",
-      "registro",
-      "pasoN",
-      "mensaje"
-    ],
-    "bloques": [
-      {
-        "id": "botReiniciar",
-        "objeto": "botReiniciar",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(n, 4)",
-          "SetValue(fase, 0)",
-          "SetValue(tipo, 1)",
-          "SetValue(estim, 0)",
-          "SetValue(registro, {})",
-          "SetValue(pasoN, 4)",
-          "SetValue(S, Element({S_izq, S_der, S_med}, tipo))",
-          "SetVisibleInView(S_izq, 1, tipo == 1)",
-          "SetVisibleInView(S_der, 1, tipo == 2)",
-          "SetVisibleInView(S_med, 1, tipo == 3)",
-          "SetValue(mensaje, \"Prediga: para f creciente, ¿la suma izquierda sobreestima o subestima el área? Registre una estimación antes de refinar\")"
-        ],
-        "targets": [
-          "botReiniciar"
-        ]
-      },
-      {
-        "id": "estim",
-        "objeto": "campoEstim → estim",
-        "evento": "Al actualizar",
-        "tipo": "update",
-        "cmds": [
-          "SetValue(fase, If(IsDefined(estim), 1, 0))",
-          "SetValue(mensaje, If(IsDefined(estim), If(abs(estim - I) > 0.5, If(estim > I, \"Su estimación excede la integral: ¿su suma sobreestima el área?\", \"Su estimación queda corta: observe la región no cubierta\"), \"Estimación razonable: verifique refinando la partición\"), \"Ingrese una estimación numérica\"))"
-        ],
-        "targets": [
-          "estim"
-        ]
-      },
-      {
-        "id": "tipo",
-        "objeto": "selector tipo (1: izquierda; 2: derecha; 3: punto medio)",
-        "evento": "Al actualizar",
-        "tipo": "update",
-        "cmds": [
-          "SetValue(S, Element({S_izq, S_der, S_med}, tipo))",
-          "SetVisibleInView(S_izq, 1, tipo == 1)",
-          "SetVisibleInView(S_der, 1, tipo == 2)",
-          "SetVisibleInView(S_med, 1, tipo == 3)",
-          "SetValue(registro, {})",
-          "SetValue(mensaje, \"Cambió el tipo de suma: el registro comienza de nuevo para comparar el mismo método\")"
-        ],
-        "targets": [
-          "tipo"
-        ]
-      },
-      {
-        "id": "n",
-        "objeto": "n",
-        "evento": "Al actualizar",
-        "tipo": "update",
-        "cmds": [
-          "If(fase == 0 && n > 4, SetValue(n, 4))",
-          "SetValue(S, Element({S_izq, S_der, S_med}, tipo))",
-          "SetValue(mensaje, If(fase == 0, \"Registre su estimación antes de usar más de cuatro rectángulos\", \"Compare la suma con la integral y explique el signo del error\"))"
-        ],
-        "targets": [
-          "n"
-        ]
-      },
-      {
-        "id": "botRefinar",
-        "objeto": "botRefinar",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(pasoN, n)",
-          "If(fase > 0, SetValue(n, Min(2 * n, 512)))",
-          "SetValue(S, Element({S_izq, S_der, S_med}, tipo))",
-          "If(fase > 0 && n > pasoN, SetValue(registro, Append(registro, (n, S))))",
-          "SetValue(mensaje, If(fase == 0, \"Antes de refinar, registre su estimación de la integral\", If(n == pasoN, \"Se alcanzó n = 512: compare los errores registrados\", If(abs(S - I) < 0.05, \"La suma casi coincide con la integral: ¿qué garantiza el límite?\", \"Compare el nuevo error con el anterior: ¿en qué factor se redujo?\"))))"
-        ],
-        "targets": [
-          "botRefinar"
-        ]
-      },
-      {
-        "id": "botReducir",
-        "objeto": "botReducir",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(n, Max(1, floor(n / 2)))",
-          "SetValue(S, Element({S_izq, S_der, S_med}, tipo))",
-          "SetValue(mensaje, \"Se redujo la partición: explique cómo cambia el error\")"
-        ],
-        "targets": [
-          "botReducir"
-        ]
-      },
-      {
-        "id": "botRegistrar",
-        "objeto": "botRegistrar",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(fase, If(IsDefined(estim), 1, 0))",
-          "SetValue(mensaje, If(IsDefined(estim), If(abs(estim - I) > 0.5, If(estim > I, \"Su estimación excede la integral: ¿su suma sobreestima el área?\", \"Su estimación queda corta: observe la región no cubierta\"), \"Estimación razonable: verifique refinando la partición\"), \"Ingrese una estimación numérica\"))"
-        ],
-        "targets": [
-          "botRegistrar"
-        ]
-      }
-    ]
-  },
-  "autovectores": {
-    "coord": [
-      -5,
-      5,
-      -4.5,
-      4.5
-    ],
-    "construccion": [
-      "A = {{2, 1}, {1, 2}}",
-      "O = (0, 0)",
-      "c = Circle(O, 1)",
-      "P = Point(c)",
-      "v = Vector(O, P)",
-      "w = A * v",
-      "theta = 0",
-      "alin = false",
-      "k = 0",
-      "intentos = 0",
-      "p = 0",
-      "q = 0",
-      "r = 0",
-      "conjetura = \"\"",
-      "mensaje = \"\"",
-      "residuo = Length(w - k * v)",
-      "normaW = Length(w)",
-      "candTxt = \"Candidato λ ≈ \" + round(k, 4)",
-      "ecuTxt = \"Av = λv, con v ≠ 0\"",
-      "campoConjetura = InputBox(conjetura)",
-      "campoMatriz = InputBox(A)",
-      "botReiniciar = Button(\"Reiniciar\")",
-      "botNuevaMatriz = Button(\"Nueva matriz\")",
-      "botMatrizSimetrica = Button(\"Simétrica\")",
-      "botRotacion = Button(\"Rotación 90°\")"
-    ],
-    "libres": [
-      "A",
-      "theta",
-      "alin",
-      "k",
-      "intentos",
-      "p",
-      "q",
-      "r",
-      "conjetura",
-      "mensaje"
-    ],
-    "bloques": [
-      {
-        "id": "botReiniciar",
-        "objeto": "botReiniciar",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(A, {{2, 1}, {1, 2}})",
-          "SetValue(intentos, 0)",
-          "SetValue(conjetura, \"\")",
-          "SetValue(theta, If(Length(w) == 0, 0, acos(Min(1, Max(-1, (x(v) * x(w) + y(v) * y(w)) / (Length(v) * Length(w)))))))",
-          "SetValue(alin, If(Length(w) == 0, true, theta < 2° || theta > 178°))",
-          "SetValue(k, (x(v) * x(w) + y(v) * y(w)) / (x(v)^2 + y(v)^2))",
-          "SetVisibleInView(candTxt, 1, false)",
-          "SetVisibleInView(ecuTxt, 1, false)",
-          "SetValue(mensaje, \"Barra la circunferencia con v: ¿existe alguna dirección que la transformación no tuerza?\")"
-        ],
-        "targets": [
-          "botReiniciar"
-        ]
-      },
-      {
-        "id": "movimiento",
-        "objeto": "P (punta de v) y A (también al editar la matriz)",
-        "evento": "Al actualizar",
-        "tipo": "update",
-        "cmds": [
-          "SetValue(theta, If(Length(w) == 0, 0, acos(Min(1, Max(-1, (x(v) * x(w) + y(v) * y(w)) / (Length(v) * Length(w)))))))",
-          "SetValue(alin, If(Length(w) == 0, true, theta < 2° || theta > 178°))",
-          "SetValue(k, (x(v) * x(w) + y(v) * y(w)) / (x(v)^2 + y(v)^2))",
-          "SetValue(mensaje, If(Length(w) == 0, \"Av es prácticamente cero: examine si v pertenece al núcleo y λ = 0\", If(alin, \"Posible autovector: v y Av casi están alineados; compruebe Av = λv\", \"v y Av no son paralelos: siga explorando\")))",
-          "SetVisibleInView(candTxt, 1, alin)"
-        ],
-        "targets": [
-          "P",
-          "A"
-        ]
-      },
-      {
-        "id": "botNuevaMatriz",
-        "objeto": "botNuevaMatriz",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(A, {{RandomBetween(-3, 3), RandomBetween(-3, 3)}, {RandomBetween(-3, 3), RandomBetween(-3, 3)}})",
-          "SetValue(intentos, intentos + 1)",
-          "SetValue(theta, If(Length(w) == 0, 0, acos(Min(1, Max(-1, (x(v) * x(w) + y(v) * y(w)) / (Length(v) * Length(w)))))))",
-          "SetValue(alin, If(Length(w) == 0, true, theta < 2° || theta > 178°))",
-          "SetValue(k, (x(v) * x(w) + y(v) * y(w)) / (x(v)^2 + y(v)^2))",
-          "SetVisibleInView(candTxt, 1, alin)",
-          "SetValue(mensaje, \"Nueva matriz: busque direcciones invariantes; puede no haber direcciones reales\")"
-        ],
-        "targets": [
-          "botNuevaMatriz"
-        ]
-      },
-      {
-        "id": "botMatrizSimetrica",
-        "objeto": "botMatrizSimetrica",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(p, RandomBetween(-3, 3))",
-          "SetValue(q, RandomBetween(-3, 3))",
-          "SetValue(r, RandomBetween(-3, 3))",
-          "SetValue(A, {{p, q}, {q, r}})",
-          "SetValue(theta, If(Length(w) == 0, 0, acos(Min(1, Max(-1, (x(v) * x(w) + y(v) * y(w)) / (Length(v) * Length(w)))))))",
-          "SetValue(alin, If(Length(w) == 0, true, theta < 2° || theta > 178°))",
-          "SetValue(k, (x(v) * x(w) + y(v) * y(w)) / (x(v)^2 + y(v)^2))",
-          "SetVisibleInView(candTxt, 1, alin)",
-          "SetValue(mensaje, \"Matriz simétrica: en este caso siempre hay direcciones invariantes; encuéntrelas\")"
-        ],
-        "targets": [
-          "botMatrizSimetrica"
-        ]
-      },
-      {
-        "id": "conjetura",
-        "objeto": "campoConjetura → conjetura",
-        "evento": "Al actualizar",
-        "tipo": "update",
-        "cmds": [
-          "SetVisibleInView(ecuTxt, 1, Length(conjetura) > 0)",
-          "SetValue(mensaje, If(Length(conjetura) > 0, \"Contraste su condición con la ecuación Av = λv\", \"Escriba una conjetura para revelar la ecuación\"))"
-        ],
-        "targets": [
-          "conjetura"
-        ]
-      },
-      {
-        "id": "botRotacion",
-        "objeto": "botRotacion",
-        "evento": "Al hacer clic",
-        "tipo": "click",
-        "cmds": [
-          "SetValue(A, {{0, -1}, {1, 0}})",
-          "SetValue(theta, If(Length(w) == 0, 0, acos(Min(1, Max(-1, (x(v) * x(w) + y(v) * y(w)) / (Length(v) * Length(w)))))))",
-          "SetValue(alin, If(Length(w) == 0, true, theta < 2° || theta > 178°))",
-          "SetValue(k, (x(v) * x(w) + y(v) * y(w)) / (x(v)^2 + y(v)^2))",
-          "SetVisibleInView(candTxt, 1, alin)",
-          "SetValue(mensaje, \"Rotación de 90°: explique por qué ningún vector real no nulo conserva su dirección\")"
-        ],
-        "targets": [
-          "botRotacion"
         ]
       }
     ]
@@ -777,19 +439,6 @@ function commandCheck(g,command){
       const count=g.getValue('N'),max=g.getValue('n');
       return ()=>{const data=readObject(g,target).value;return Array.isArray(data)&&data.length===count&&data.every(v=>Number.isInteger(v)&&v>=0&&v<=max);};
     }
-    if(/RandomBetween\(/.test(args[1])){
-      // Do not draw again while verifying: check shape, integer type and range.
-      const calls=[...args[1].matchAll(/RandomBetween\(\s*(-?\d+)\s*,\s*(-?\d+)\s*\)/g)];
-      if(!calls.length)return null;
-      const lo=Math.min(...calls.map(m=>Number(m[1]))),hi=Math.max(...calls.map(m=>Number(m[2])));
-      const integer=v=>Number.isInteger(v)&&v>=lo&&v<=hi;
-      if(args[1].trim().startsWith('RandomBetween('))return ()=>integer(g.getValue(target));
-      if(calls.length===4&&args[1].trim().startsWith('{{'))return ()=>{
-        const a=readObject(g,target).value;
-        return Array.isArray(a)&&a.length===2&&a.every(row=>Array.isArray(row)&&row.length===2&&row.every(integer));
-      };
-      return null;
-    }
     const expected=readExpression(g,args[1]);
     return ()=>sameValue(readObject(g,target).value,expected.value);
   }
@@ -922,7 +571,7 @@ function buildCase(name,retryOnly=false){
   attempt(name,'Pausar antes de construir',()=>g.stopAnimation());
   const commands=CASOS[name].construccion;
   log(name,`Construcción ${st.buildRuns} · ${name} · versión ${VERSION}`,'ev','build:'+st.buildRuns,
-    {appletId:'scriptgg_'+name+'_cuatro',onLoadCalls:st.onLoadCalls,mode:retryOnly?'solo discrepancias':'completa'});
+    {appletId:'scriptgg_'+name+'_derivada_binomial',onLoadCalls:st.onLoadCalls,mode:retryOnly?'solo discrepancias':'completa'});
   try{
     commands.forEach((command,i)=>{
       if(retryOnly&&st.baseResults.get(i)?.kind==='ok')return;
@@ -952,8 +601,6 @@ function configure(name){
   apply('visibilidad inicial',()=>{for(const id of g.getAllObjectNames())g.setVisible(id,false);});
   const visible={
     derivada:['f','A','B','s','xB','campoConjetura','botReiniciar','botIniciar','botPausar'],
-    riemann:['f','n','tipo','campoEstim','botReiniciar','botRefinar','botReducir','botRegistrar','S_izq'],
-    autovectores:['O','c','P','v','w','campoMatriz','campoConjetura','botReiniciar','botNuevaMatriz','botMatrizSimetrica','botRotacion'],
     binomial:['n','p','N','kSel','mostrarNormal','mostrarFrec','campoEstim','barTeor','barFrec','botSimular','botReiniciar'],
   }[name];
   visible.forEach(id=>object(id,id=>g.setVisible(id,true)));
@@ -977,25 +624,6 @@ function configure(name){
     pos('botReiniciar',16,16);pos('botIniciar',115,16);pos('botPausar',222,16);pos('xB',20,70);pos('campoConjetura',20,535);
     caption('campoConjetura','Conjetura: m tiende a');
     pos('limTxt',-1.2,-1.2);object('limTxt',id=>g.setLabelVisible(id,false));object('a',id=>g.setFixed(id,true,false));
-  }else if(name==='riemann'){
-    color('f',40,80,170);thickness('f',5);object('f',id=>g.setLabelVisible(id,false));
-    for(const id of ['S_izq','S_der','S_med']){
-      color(id,230,120,20);object(id,id=>g.setFilling(id,0.3));
-      object(id,id=>g.setLabelVisible(id,false));thickness(id,2);
-    }
-    pos('botReiniciar',16,16);pos('botRefinar',116,16);pos('botReducir',232,16);
-    pos('n',20,75);pos('tipo',20,108);pos('campoEstim',20,535);pos('botRegistrar',400,535);
-    caption('campoEstim','Estime la integral');caption('tipo','tipo');
-    for(const id of ['a','b'])object(id,id=>g.setFixed(id,true,false));
-  }else if(name==='autovectores'){
-    color('v',40,80,170);color('w',230,120,20);color('P',40,80,170);color('c',145,155,168);
-    thickness('v',6);thickness('w',6);thickness('c',2);object('c',id=>g.setLabelVisible(id,false));
-    object('P',id=>g.setPointSize(id,6));object('O',id=>g.setFixed(id,true,false));
-    pos('botReiniciar',16,16);pos('botNuevaMatriz',116,16);pos('botMatrizSimetrica',256,16);pos('botRotacion',371,16);
-    pos('campoMatriz',20,70);caption('campoMatriz','A =');
-    pos('campoConjetura',20,535);caption('campoConjetura','Conjetura');
-    pos('candTxt',-4.6,-2.8);pos('ecuTxt',-4.6,-3.4);
-    for(const id of ['candTxt','ecuTxt'])object(id,id=>g.setLabelVisible(id,false));
   }else if(name==='binomial'){
     color('barTeor',40,80,170);color('barFrec',230,120,20);color('g',30,130,60);
     for(const id of ['barTeor','barFrec'])object(id,id=>g.setFilling(id,0.55));thickness('g',5);object('g',id=>g.setLineStyle(id,1));
@@ -1017,24 +645,6 @@ function refresh(name){
     byId('metricas-'+name).textContent=`xB = ${fmt(g.getValue('xB'))} · m = ${fmt(g.getValue('m'))} · Registros de conjetura: ${g.getValue('intentos')}`;
     byId('detalle-'+name).textContent=g.getVisible('limTxt',1)?"f′(1) = −0.5. Justifique por qué el límite de las pendientes tiene ese valor.":'Formule su conjetura antes de revelar el límite.';
     byId('nota-'+name).textContent='La aproximación por un solo lado no prueba la existencia de la derivada. La función cúbica de este caso sí es derivable.';
-  }else if(name==='riemann'){
-    const type=g.getValue('tipo'),n=g.getValue('n'),sum=g.getValue('S'),integral=g.getValue('I');
-    byId('metricas-'+name).textContent=`n = ${n} · Método: ${['izquierda','derecha','punto medio'][type-1]||'—'} · S = ${fmt(sum)} · I = ${fmt(integral)} · S − I = ${fmt(sum-integral)}`;
-    byId('detalle-'+name).textContent=g.getValue('fase')>0?'Estimación registrada: puede refinar la partición.':'Registre su estimación antes de refinar. Si su estimación es 0, pulse Registrar estimación.';
-    byId('nota-'+name).textContent='Referencia exacta para este ejemplo: I = 14/3. Observe el signo y la reducción del error.';
-    const tbody=byId('tabla-riemann');tbody.replaceChildren();
-    const count=g.exists('registro')?g.getValue('Length(registro)'):0;
-    for(let i=1;i<=count;i++){
-      const row=document.createElement('tr'),rn=g.getValue('x(Element(registro,'+i+'))'),rs=g.getValue('y(Element(registro,'+i+'))');
-      for(const value of [rn,rs,rs-integral]){const td=document.createElement('td');td.textContent=fmt(value);row.append(td);}
-      tbody.append(row);
-    }
-    if(!count){const row=document.createElement('tr'),td=document.createElement('td');td.colSpan=3;td.textContent='Todavía no hay refinamientos.';row.append(td);tbody.append(row);}
-  }else if(name==='autovectores'){
-    const norm=g.getValue('normaW'),aligned=g.getValue('alin')===1;
-    byId('metricas-'+name).textContent=`A = ${g.getValueString('A')} · θ = ${norm<=1e-8?'no definido (Av ≈ 0)':fmt(g.getValue('theta')*180/Math.PI)+'°'} · ||Av − kv|| = ${fmt(g.getValue('residuo'))}`;
-    byId('detalle-'+name).textContent=g.getVisible('candTxt',1)?`Candidato λ ≈ ${fmt(g.getValue('k'))}. Compruebe la igualdad con la matriz.`:'Arrastre P para buscar una dirección invariante.';
-    byId('nota-'+name).textContent=norm<=1e-8?'Av ≈ 0: posible vector del núcleo con autovalor 0.':aligned?'La alineación dentro de 2° es aproximada. El signo de k distingue si se conserva o invierte el sentido.':'k es el factor de proyección; solo en la alineación exacta corresponde a un autovalor.';
   }else if(name==='binomial'){
     const n=g.getValue('n'),p=g.getValue('p'),sigma=g.getValue('sigma'),tam=g.getValue('tam'),show=g.getValue('mostrarNormal')===1;
     byId('metricas-'+name).textContent=`n = ${n} · p = ${fmt(p)} · N = ${g.getValue('N')} · Datos de la muestra: ${tam} · μ = ${fmt(g.getValue('mu'))} · σ = ${fmt(sigma)} · Brecha máxima = ${tam?fmt(g.getValue('maxDif')):'— (sin muestra)'}`;
@@ -1060,28 +670,6 @@ function verifyState(name){
     check(near(g.getXcoord('B'),b),'B y xB están sincronizados');
     const text=g.getValueString('conjetura').replace(/^"|"$/g,'');
     check(g.getVisible('limTxt',1)===(text.length>0),'la revelación del límite coincide con la conjetura');
-  }else if(name==='riemann'){
-    const n=g.getValue('n'),type=g.getValue('tipo'),a=g.getValue('a'),b=g.getValue('b');
-    const sumAt=(count,d)=>{const h=(b-a)/count;let total=0;for(let i=0;i<count;i++)total+=(((a+(i+d)*h)**2)+1)*h;return total;};
-    check(Number.isInteger(n)&&n>=1&&n<=512,'n es entero y está entre 1 y 512');
-    check(near(g.getValue('I'),14/3),'la integral de x²+1 en [0,2] es 14/3');
-    for(const [id,d]of [['S_izq',0],['S_der',1],['S_med',.5]])check(near(g.getValue(id),sumAt(n,d)),id+' coincide con la suma calculada independientemente');
-    const d=[0,1,.5][type-1];check(near(g.getValue('S'),sumAt(n,d)),'S corresponde al método y al n actuales');
-    check(g.getValue('fase')>0||n<=4,'sin estimación registrada, n no supera 4');
-    const count=g.getValue('Length(registro)');let valid=true;
-    for(let i=1;i<=count;i++){const rn=g.getValue('x(Element(registro,'+i+'))'),rs=g.getValue('y(Element(registro,'+i+'))');if(!Number.isInteger(rn)||rn<1||rn>512||!near(rs,sumAt(rn,d)))valid=false;}
-    check(valid,'cada fila del registro conserva la suma correspondiente a su n');
-  }else if(name==='autovectores'){
-    const vx=g.getXcoord('v'),vy=g.getYcoord('v'),wx=g.getXcoord('w'),wy=g.getYcoord('w');
-    const a11=g.getValue('Element(A,1,1)'),a12=g.getValue('Element(A,1,2)'),a21=g.getValue('Element(A,2,1)'),a22=g.getValue('Element(A,2,2)');
-    check(near(vx*vx+vy*vy,1),'v tiene norma 1 y nunca es el vector cero');
-    check(near(wx,a11*vx+a12*vy)&&near(wy,a21*vx+a22*vy),'w coincide con el producto A·v');
-    const norm=Math.hypot(wx,wy),k=(vx*wx+vy*wy)/(vx*vx+vy*vy),theta=norm<=1e-8?0:Math.acos(Math.min(1,Math.max(-1,(vx*wx+vy*wy)/(Math.hypot(vx,vy)*norm))));
-    check(near(g.getValue('k'),k),'k conserva el signo y coincide con (v·Av)/(v·v)');
-    check(near(g.getValue('theta'),theta),'theta usa el ángulo menor y trata Av≈0 por separado');
-    const aligned=norm<=1e-8||theta<2*Math.PI/180||theta>178*Math.PI/180;
-    check((g.getValue('alin')===1)===aligned,'la detección aplica el umbral de 2° alrededor de 0° y 180°');
-    check(near(g.getValue('residuo'),Math.hypot(wx-k*vx,wy-k*vy)),'el residuo mide la discrepancia en Av=kv');
   }else if(name==='binomial'){
     const n=g.getValue('n'),p=g.getValue('p'),tam=g.getValue('tam');
     check(g.getValue('largoTeor')===n+1&&g.getValue('largoFrec')===n+1,'las listas contienen n + 1 entradas');
@@ -1130,11 +718,11 @@ function loadCase(name){
       // Lock BEFORE calling any API method. Reentrant callbacks cannot start work.
       accepted=true;apps[name]=g;st.phase='loaded';clearTimeout(timer);
       let version='no disponible';try{version=String(g.getVersion());}catch(error){}
-      log(name,'Applet cargado. Pulse Construir y verificar.','ev','api-loaded',{version,appletId:'scriptgg_'+name+'_cuatro'});
+      log(name,'Applet cargado. Pulse Construir y verificar.','ev','api-loaded',{version,appletId:'scriptgg_'+name+'_derivada_binomial'});
       setStatus(name,'GeoGebra está listo. Pulse Construir y verificar.');
       document.querySelector(`[data-build="${name}"]`).disabled=false;
     };
-    const parameters={appName:'classic',id:'scriptgg_'+name+'_cuatro',width:660,height:590,disableAutoScale:true,
+    const parameters={appName:'classic',id:'scriptgg_'+name+'_derivada_binomial',width:660,height:590,disableAutoScale:true,
       showToolBar:false,showAlgebraInput:false,showMenuBar:false,perspective:'G',
       showResetIcon:false,enableRightClick:false,enableShiftDragZoom:false,showZoomButtons:false,
       showAnimationButton:false,showFullscreenButton:false,language:'es',rounding:'6',
@@ -1156,7 +744,7 @@ function exportLog(name){
   for(const entry of st.entries.values())lines.push(`[${entry.first}] ${entry.text}`,`Repeticiones: ${entry.count}; última: ${entry.last}`,
     'Primera observación: '+JSON.stringify(entry.detail),'Última observación: '+JSON.stringify(entry.latestDetail),'');
   const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='Registro_GeoGebra_'+name+'_cuatro_casos.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  a.href=url;a.download='Registro_GeoGebra_'+name+'_derivada_binomial.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 document.addEventListener('click',event=>{
   const target=event.target;if(!(target instanceof Element))return;
