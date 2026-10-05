@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scripts en vivo · GeoGebra y SCRIPT-GG</title>
+<style>
+:root{--ink:#172b42;--muted:#536373;--line:#d9e1e8;--blue:#245ba8;--ok:#167342;--bad:#b42b25;--panel:#f4f7fa;--mark:#ffe68a}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,Segoe UI,sans-serif;color:var(--ink);background:#fff}
+body>header{padding:22px 28px 14px;max-width:1450px;margin:auto}h1{font-size:25px;line-height:1.2;margin:0 0 10px}h2{font-size:18px;margin:0 0 7px}p{margin:7px 0 12px}button,select{font:inherit}button{border:1px solid #b3bfcc;border-radius:6px;background:white;color:var(--ink);padding:6px 11px;cursor:pointer}button:hover{background:#eef4fb}button:disabled{opacity:.5;cursor:wait}button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #316fbc;outline-offset:3px}.muted{color:var(--muted)}code,.cmd{font-family:ui-monospace,Consolas,monospace}nav{display:flex;gap:8px;padding:0 28px;max-width:1450px;margin:auto}nav button{border-radius:7px 7px 0 0;padding:10px 14px}nav button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}main{border-top:1px solid var(--line);max-width:1450px;margin:auto}.caso{display:none;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.caso.activo{display:grid}.applet{padding:18px;border-right:1px solid var(--line);min-width:0}.guion{padding:18px;min-width:0}.pista{font-size:14px;color:var(--muted)}.ggb-wrap{width:100%;min-width:0;overflow:hidden}.ggb{width:100%;min-height:360px}.load-status{padding:8px 0;color:var(--muted)}.load-status.error{color:var(--bad)}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}.bloques{max-height:670px;overflow:auto;padding:2px 4px 8px 0}.bloque{border:1px solid var(--line);border-radius:7px;margin:0 0 12px;overflow:hidden}.bloque header{padding:9px 11px;background:var(--panel);display:flex;align-items:center;justify-content:space-between;gap:8px}.bloque header small{display:block;color:var(--muted)}.bloque header button{font-size:13px}.cmd{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55;padding:4px 11px}.cmd.activa{background:var(--mark)}.cmd.ok:before{content:'✓ ';color:var(--ok)}.cmd.bad:before{content:'✗ ';color:var(--bad)}.console{border-top:1px solid var(--line);margin-top:12px;background:var(--panel)}.console header{display:flex;justify-content:space-between;padding:9px 10px;align-items:center;gap:8px}.console ol{font:12px/1.5 ui-monospace,Consolas,monospace;list-style:none;padding:8px 10px;margin:0;height:200px;overflow:auto;overflow-wrap:anywhere}.ok{color:var(--ok)}.bad{color:var(--bad)}.ev{color:var(--blue)}.readout{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}.readout p{margin:4px 0}.message{font-weight:600}.metrics{font-variant-numeric:tabular-nums}.legend{font-size:13px}.legend span{margin-right:13px}.blue{color:#2850aa}.orange{color:#b95c00}.green{color:#16823c}.normal-note{font-size:13px;color:#714d00}.limit{color:#176a38}.note{font-size:13px;color:var(--muted)}details{margin-top:12px}summary{cursor:pointer}details pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--panel);padding:12px;max-height:320px;overflow:auto}footer{max-width:1450px;margin:0 auto;padding:18px 28px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}a{color:var(--blue)}[hidden]{display:none!important}
+@media(max-width:1050px){.caso.activo{grid-template-columns:1fr}.applet{border-right:0;border-bottom:1px solid var(--line)}.bloques{max-height:none}}
+@media(max-width:600px){body>header{padding:16px}h1{font-size:22px}nav{padding:0 12px;gap:4px}nav button{font-size:13px;padding:8px}.applet,.guion{padding:12px}}
+</style></head><body>
+<header><h1>Scripts en vivo con GeoGebra</h1>
+<p>Explore el applet y siga los bloques de GGBScript del artículo. JavaScript conecta los eventos con GeoGebra y registra cada comando. La marca ✓ indica que se comprobó el resultado esperado de la instrucción; el botón <b>Verificar estado</b> contrasta relaciones matemáticas.</p>
+<p class="note">Descargue este HTML y ábralo en un navegador con internet. GeoGebra se carga desde geogebra.org; la vista previa del chat puede bloquearlo. Los bloques se ejecutan sin pausas intermedias; el resaltado reproduce después la traza del último clic.</p></header>
+<nav role="tablist" aria-label="Casos matemáticos">
+<button id="tab-derivada" role="tab" aria-selected="true" aria-controls="caso-derivada" tabindex="0" data-caso="derivada">1 · Derivada y secantes</button>
+<button id="tab-binomial" role="tab" aria-selected="false" aria-controls="caso-binomial" tabindex="-1" data-caso="binomial">2 · Binomial y normal</button>
+</nav><main><section id="caso-derivada" role="tabpanel" aria-labelledby="tab-derivada" class="caso activo" >
+ <div class="applet"><h2>De la secante a la tangente</h2><p class="pista">Mueva el deslizador xB o pulse Acercar B. Aquí f(x)=x³/6−x+1 y a=1 son fijos; el acercamiento es por la derecha. Escriba una conjetura y confirme con Intro.</p>
+ <div class="load-status" id="estado-derivada" role="status">Preparando GeoGebra…</div>
+ <button data-retry="derivada" hidden>Reintentar carga</button>
+ <div class="ggb-wrap escala-derivada"><div class="ggb" id="ggb-derivada"></div></div>
+ <div class="readout"><p class="message" id="mensaje-derivada">Esperando la carga.</p><p class="metrics" id="metricas-derivada"></p><p id="detalle-derivada"></p><p class="normal-note" id="nota-derivada"></p></div>
+ <div class="legend"><span class="blue">Azul: función</span><span class="orange">Naranja: secante</span><span class="green">Verde: tangente</span></div>
+ <div class="toolbar"><button data-check="derivada" disabled>Verificar estado</button></div>
+ <p class="note">Una conjetura no vacía revela el límite; no se califica su contenido. El contador registra cambios de texto no vacíos, no razonamientos correctos. La animación se detiene a distancia ≤ 0.01 de a.</p>
+ </div><div class="guion"><h2>Objeto, evento y comandos</h2><div class="bloques" id="bloques-derivada"></div>
+ <details><summary>Construcción base y configuración</summary><p class="note">Cree estos objetos antes de asignar los scripts. En Propiedades de xB: animación Decreciente. El HTML aplica ese ajuste mediante XML.</p><pre id="base-derivada"></pre></details>
+ <div class="console"><header><span>Consola · últimos 500 registros</span><div><button data-export="derivada">Guardar registro</button> <button data-clear="derivada">Limpiar</button></div></header><ol id="consola-derivada" aria-label="Registro de comandos"></ol></div>
+ </div></section>
+<section id="caso-binomial" role="tabpanel" aria-labelledby="tab-binomial" class="caso " hidden>
+ <div class="applet"><h2>Frecuencias y probabilidades</h2><p class="pista">Ajuste n, p y N; prediga y pulse Simular. Al cambiar un parámetro se borra la muestra anterior. k selecciona la probabilidad acumulada.</p>
+ <div class="load-status" id="estado-binomial" role="status">Abra esta pestaña para cargar el applet.</div>
+ <button data-retry="binomial" hidden>Reintentar carga</button>
+ <div class="ggb-wrap escala-binomial"><div class="ggb" id="ggb-binomial"></div></div>
+ <div class="readout"><p class="message" id="mensaje-binomial">Esperando la carga.</p><p class="metrics" id="metricas-binomial"></p><p id="detalle-binomial"></p><p class="normal-note" id="nota-binomial"></p></div>
+ <div class="legend"><span class="blue">Azul: probabilidad</span><span class="orange">Naranja: frecuencia</span><span class="green">Verde: densidad normal</span></div>
+ <div class="toolbar"><button data-check="binomial" disabled>Verificar estado</button></div>
+ <p class="note">La curva normal representa densidad, no probabilidad puntual. Para P(X ≤ k) se usa k + 0.5. Las tolerancias 0.03 y 0.05 son orientaciones didácticas, no pruebas estadísticas.</p>
+ </div><div class="guion"><h2>Objeto, evento y comandos</h2><div class="bloques" id="bloques-binomial"></div>
+ <details><summary>Construcción base y configuración</summary><p class="note">Cree estos objetos antes de asignar los scripts. datos y frec son listas libres. teor, mu, sigma y maxDif son dependientes y no reciben SetValue.</p><pre id="base-binomial"></pre></details>
+ <div class="console"><header><span>Consola · últimos 500 registros</span><div><button data-export="binomial">Guardar registro</button> <button data-clear="binomial">Limpiar</button></div></header><ol id="consola-binomial" aria-label="Registro de comandos"></ol></div>
+ </div></section></main><footer>Material de apoyo a SCRIPT-GG · Revisión técnica 3 · septiembre de 2026.
+<a href="https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_API/" target="_blank" rel="noopener noreferrer">API oficial de GeoGebra</a>.
+La comprobación técnica no demuestra eficacia en el aprendizaje.</footer>
+<script>
+"use strict";
+const CASOS = {
+  "derivada": {
+    "coord": [
+      -1.4,
+      5,
+      -2.5,
+      9.5
+    ],
+    "construccion": [
+      "f(x) = x^3 / 6 - x + 1",
+      "a = 1",
+      "xB = Slider(1.001, 4, 0.001, 0.6, 260, false, true, false, false)",
+      "SetValue(xB, 4)",
+      "A = (a, f(a))",
+      "B = (xB, f(xB))",
+      "s = Line(A, B)",
+      "t = Tangent(A, f)",
+      "m = 0",
+      "fase = 0",
+      "intentos = 0",
+      "conjetura = \"\"",
+      "campoConjetura = InputBox(conjetura)",
+      "msj1 = \"Secante: razon de cambio promedio entre a y xB\"",
+      "msj2 = \"Compare las pendientes al acercar B a A\"",
+      "msj3 = \"Compare la secante con la tangente; la cercania no demuestra el limite\"",
+      "mensaje = \"\"",
+      "limTxt = \"f'(1) = lim_(x -> 1) (f(x)-f(1))/(x-1) = -0.5\"",
+      "botReiniciar = Button(\"Reiniciar\")",
+      "botIniciar = Button(\"Acercar B\")",
+      "botPausar = Button(\"Pausar\")"
+    ],
+    "libres": [
+      "m",
+      "fase",
+      "intentos",
+      "conjetura",
+      "mensaje",
+      "xB"
+    ],
+    "bloques": [
+      {
+        "id": "botReiniciar",
+        "objeto": "botReiniciar",
+        "evento": "Al hacer clic",
+        "tipo": "click",
+        "cmds": [
+          "StartAnimation(xB, false)",
+          "SetValue(fase, 0)",
+          "SetValue(conjetura, \"\")",
+          "SetValue(intentos, 0)",
+          "SetValue(xB, a + 3)",
+          "SetValue(m, (f(xB) - f(a)) / (xB - a))",
+          "SetVisibleInView(t, 1, false)",
+          "SetVisibleInView(limTxt, 1, false)",
+          "SetValue(mensaje, \"Mueva xB y observe la pendiente de la secante\")"
+        ],
+        "targets": [
+          "botReiniciar"
+        ]
+      },
+      {
+        "id": "botIniciar",
+        "objeto": "botIniciar",
+        "evento": "Al hacer clic",
+        "tipo": "click",
+        "cmds": [
+          "If(xB <= a + 0.01, SetValue(xB, a + 3))",
+          "SetValue(fase, 1)",
+          "SetValue(mensaje, \"Observe el cociente incremental mientras B se acerca a A\")",
+          "StartAnimation(xB, true)"
+        ],
+        "targets": [
+          "botIniciar"
+        ]
+      },
+      {
+        "id": "botPausar",
+        "objeto": "botPausar",
+        "evento": "Al hacer clic",
+        "tipo": "click",
+        "cmds": [
+          "StartAnimation(xB, false)",
+          "SetValue(mensaje, \"Animacion en pausa: analice el cociente actual\")"
+        ],
+        "targets": [
+          "botPausar"
+        ]
+      },
+      {
+        "id": "xB",
+        "objeto": "xB",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetValue(m, (f(xB) - f(a)) / (xB - a))",
+          "SetValue(mensaje, If(abs(xB - a) > 0.5, msj1, abs(xB - a) > 0.01, msj2, msj3))",
+          "SetVisibleInView(t, 1, abs(xB - a) <= 0.01)",
+          "If(xB <= a + 0.01, StartAnimation(xB, false))"
+        ],
+        "targets": [
+          "xB"
+        ]
+      },
+      {
+        "id": "conjetura",
+        "objeto": "conjetura (texto vinculado al campo)",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "If(Length(conjetura) > 0, SetValue(intentos, intentos + 1))",
+          "SetVisibleInView(limTxt, 1, Length(conjetura) > 0)",
+          "SetValue(mensaje, If(Length(conjetura) > 0, \"Compare su conjetura con el limite y justifique\", \"Escriba una conjetura sobre el valor al que tiende m\"))"
+        ],
+        "targets": [
+          "conjetura"
+        ]
+      }
+    ]
+  },
+  "binomial": {
+    "coord": [
+      -2,
+      22,
+      -0.04,
+      0.5
+    ],
+    "construccion": [
+      "n = Slider(1, 40, 1, 1, 210, false, true, false, false)",
+      "SetValue(n, 20)",
+      "p = Slider(0, 1, 0.01, 1, 210, false, true, false, false)",
+      "SetValue(p, 0.5)",
+      "N = Slider(10, 2000, 10, 1, 210, false, true, false, false)",
+      "SetValue(N, 200)",
+      "kSel = Slider(0, n, 1, 1, 210, false, true, false, false)",
+      "SetValue(kSel, 10)",
+      "datos = {}",
+      "frec = CopyFreeObject(Sequence(0, k, 0, n))",
+      "teor = Sequence(BinomialDist(n, p, k, false), k, 0, n)",
+      "mu = n * p",
+      "sigma = sqrt(n * p * (1 - p))",
+      "tam = Length(datos)",
+      "maxDif = If(tam > 0, Max(Sequence(abs(Element(frec, k + 1) - Element(teor, k + 1)), k, 0, n)))",
+      "estim = 0",
+      "mostrarNormal = false",
+      "mostrarFrec = true",
+      "g(x) = If(sigma > 0, Normal(mu, sigma, x, false))",
+      "barTeor = BarChart(Sequence(k - 0.2, k, 0, n), teor, 0.4)",
+      "barFrec = BarChart(Sequence(k + 0.2, k, 0, n), frec, 0.4)",
+      "probAcum = BinomialDist(n, p, kSel, true)",
+      "frecAcum = If(tam > 0, CountIf(v <= kSel, v, datos) / tam)",
+      "normalAcum = If(sigma > 0, Normal(mu, sigma, kSel + 0.5, true))",
+      "sumaTeor = Sum(teor)",
+      "sumaFrec = Sum(frec)",
+      "largoTeor = Length(teor)",
+      "largoFrec = Length(frec)",
+      "campoEstim = InputBox(estim)",
+      "mensaje = \"\"",
+      "botSimular = Button(\"Simular\")",
+      "botReiniciar = Button(\"Reiniciar\")"
+    ],
+    "libres": [
+      "datos",
+      "frec",
+      "estim",
+      "mensaje",
+      "mostrarNormal",
+      "mostrarFrec"
+    ],
+    "bloques": [
+      {
+        "id": "botReiniciar",
+        "objeto": "botReiniciar",
+        "evento": "Al hacer clic",
+        "tipo": "click",
+        "cmds": [
+          "SetValue(datos, {})",
+          "SetValue(frec, Sequence(0, k, 0, n))",
+          "SetValue(kSel, Min(kSel, n))",
+          "SetValue(mostrarNormal, false)",
+          "SetValue(mostrarFrec, true)",
+          "SetValue(estim, 0)",
+          "SetVisibleInView(g, 1, false)",
+          "SetVisibleInView(barFrec, 1, true)",
+          "SetValue(mensaje, \"Ajuste n, p y N; formule una prediccion y luego simule\")"
+        ],
+        "targets": [
+          "botReiniciar"
+        ]
+      },
+      {
+        "id": "botSimular",
+        "objeto": "botSimular",
+        "evento": "Al hacer clic",
+        "tipo": "click",
+        "cmds": [
+          "SetValue(datos, Sequence(RandomBinomial(n, p), j, 1, N))",
+          "SetValue(frec, Sequence(CountIf(v == k, v, datos) / Length(datos), k, 0, n))",
+          "SetValue(mensaje, If(maxDif < 0.03, \"Brecha maxima menor que 0.03: compare varias muestras\", \"Brecha maxima de al menos 0.03: explore el efecto de N\"))"
+        ],
+        "targets": [
+          "botSimular"
+        ]
+      },
+      {
+        "id": "parametros",
+        "objeto": "n, p y N (mismo bloque en cada objeto)",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetValue(datos, {})",
+          "SetValue(frec, Sequence(0, k, 0, n))",
+          "SetValue(kSel, Min(kSel, n))",
+          "SetVisibleInView(g, 1, mostrarNormal && sigma > 0)",
+          "SetValue(mensaje, \"Los parametros cambiaron: vuelva a simular y revise su estimacion\")"
+        ],
+        "targets": [
+          "n",
+          "p",
+          "N"
+        ]
+      },
+      {
+        "id": "mostrarNormal",
+        "objeto": "mostrarNormal",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetVisibleInView(g, 1, mostrarNormal && sigma > 0)",
+          "SetValue(mensaje, If(mostrarNormal, If(sigma == 0, \"Distribucion degenerada: no existe una normal con sigma cero\", If(n * p <= 5 || n * (1 - p) <= 5, \"Advertencia: no se cumple np > 5 y n(1-p) > 5\", \"Compare la probabilidad exacta con la normal y correccion de continuidad\")), \"Normal oculta: compare las barras\"))"
+        ],
+        "targets": [
+          "mostrarNormal"
+        ]
+      },
+      {
+        "id": "mostrarFrec",
+        "objeto": "mostrarFrec",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetVisibleInView(barFrec, 1, mostrarFrec)"
+        ],
+        "targets": [
+          "mostrarFrec"
+        ]
+      },
+      {
+        "id": "estim",
+        "objeto": "estim (numero vinculado al campo)",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetValue(mensaje, If(IsDefined(estim), If(estim < 0 || estim > 1, \"Ingrese una probabilidad entre 0 y 1\", If(abs(estim - BinomialDist(n, p, kSel, true)) < 0.05, \"Diferencia menor que 0.05: justifique su estimacion\", \"Compare su estimacion con la probabilidad exacta y la frecuencia acumulada\")), \"Ingrese una probabilidad numerica entre 0 y 1\"))"
+        ],
+        "targets": [
+          "estim"
+        ]
+      },
+      {
+        "id": "kSel",
+        "objeto": "kSel",
+        "evento": "Al actualizar",
+        "tipo": "update",
+        "cmds": [
+          "SetValue(mensaje, \"Cambio k: vuelva a comparar su estimacion con las probabilidades acumuladas\")"
+        ],
+        "targets": [
+          "kSel"
+        ]
+      }
+    ]
+  }
+};
+// No native object scripts are installed in this HTML: listeners run each block once.
+const apps = {}, states = {};
+let loader = null;
+const byId = id => document.getElementById(id);
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = value => Number.isFinite(value) ? value.toLocaleString('es',{maximumFractionDigits:6}) : '—';
+function state(name){
+  return states[name] ||= {phase:'idle',epoch:0,busy:false,seen:new Map(),records:[],trace:0,callbacks:[]};
+}
+function log(name,text,kind='ev'){
+  const st=state(name), ol=byId('consola-'+name), li=document.createElement('li');
+  li.className=kind; li.textContent=text; ol.appendChild(li);
+  st.records.push(new Date().toISOString()+' '+text);
+  if(st.records.length>500)st.records.shift();
+  while(ol.children.length>500)ol.firstChild.remove();
+  ol.scrollTop=ol.scrollHeight;
+}
+function status(name,text,error=false){
+  const el=byId('estado-'+name); el.textContent=text;el.classList.toggle('error',error);
+  document.querySelector(`[data-retry="${name}"]`).hidden=!error;
+}
+// evalCommand can return false after a successful scripting action (no new label).
+// Verify its effect; never convert every false return into success or failure.
+let probeSerial=0;
+function splitArguments(source){
+  const parts=[];let depth=0,quoted=false,escaped=false,start=0;
+  for(let i=0;i<source.length;i++){
+    const c=source[i];
+    if(quoted){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')quoted=false;continue;}
+    if(c==='"')quoted=true;
+    else if('([{'.includes(c))depth++;
+    else if(')]}'.includes(c))depth--;
+    else if(c===','&&depth===0){parts.push(source.slice(start,i).trim());start=i+1;}
+  }
+  parts.push(source.slice(start).trim());return parts;
+}
+function readObject(g,id){
+  const type=g.getObjectType(id);
+  if(type==='text')return {type,value:String(g.getValueString(id))};
+  if(type==='list')return {type,value:Array.from({length:g.getValue('Length('+id+')')},(_,i)=>g.getListValue(id,i+1))};
+  return {type,value:g.getValue(id)};
+}
+function readExpression(g,expression){
+  // Capture before execution: intentos + 1 must not be evaluated after incrementing.
+  let id;do{id='ggbVerification'+(++probeSerial);}while(g.exists(id));
+  try{
+    g.evalCommand(id+' = '+expression);
+    if(!g.exists(id)||!g.isDefined(id))throw new Error('No se pudo evaluar: '+expression);
+    return readObject(g,id);
+  }finally{if(g.exists(id))g.deleteObject(id);}
+}
+function sameValue(a,b){
+  if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>sameValue(v,b[i]));
+  if(typeof a==='number'&&typeof b==='number')return Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<=1e-9*Math.max(1,Math.abs(a),Math.abs(b));
+  return a===b;
+}
+function commandCheck(g,command){
+  const assignment=command.match(/^\s*([A-Za-z][A-Za-z0-9_]*)(?:\([^)]*\))?\s*=(?!=)/);
+  if(assignment)return ()=>g.exists(assignment[1]);
+  const call=command.match(/^\s*(\w+)\(([\s\S]*)\)\s*$/);
+  if(!call)return null;
+  const op=call[1],args=splitArguments(call[2]);
+  if(op==='If'){
+    const condition=readExpression(g,args[0]).value===1;
+    const branch=condition?args[1]:args[2];
+    return branch?commandCheck(g,branch):()=>true;
+  }
+  const target=args[0];
+  if(['SetValue','SetVisibleInView','StartAnimation'].includes(op)&&!g.exists(target))throw new Error('No existe el objeto '+target);
+  if(op==='SetValue'){
+    if(!g.isIndependent(target))throw new Error(target+' debe ser libre para usar SetValue.');
+    if(/RandomBinomial\(/.test(args[1])){
+      // Do not evaluate a random expression twice: validate the single generated sample.
+      const count=g.getValue('N'),max=g.getValue('n');
+      return ()=>{const data=readObject(g,target).value;return Array.isArray(data)&&data.length===count&&data.every(v=>Number.isInteger(v)&&v>=0&&v<=max);};
+    }
+    const expected=readExpression(g,args[1]);
+    return ()=>sameValue(readObject(g,target).value,expected.value);
+  }
+  if(op==='SetVisibleInView'){
+    const view=Number(args[1]),visible=readExpression(g,args[2]).value===1;
+    return ()=>g.getVisible(target,view)===visible;
+  }
+  if(op==='StartAnimation'){
+    const running=readExpression(g,args[1]).value===1;
+    return ()=>g.isAnimationRunning()===running;
+  }
+  return null;
+}
+function finishCommand(name,command,result,check){
+  const valid=check?check():result===true;
+  if(!valid)throw new Error('No se obtuvo el resultado esperado: '+command);
+  log(name,'✓ '+command+(check?' · comprobado':''),'ok');
+}
+function evaluateAndCheck(name,command){
+  const g=apps[name],check=commandCheck(g,command),result=g.evalCommand(command);
+  finishCommand(name,command,result,check);
+}
+function errorText(error){return String(error?.message||error);}
+function checkedCommand(name,command){
+  try{evaluateAndCheck(name,command);}
+  catch(error){log(name,'✗ '+command+' · '+errorText(error),'bad');throw error;}
+}
+function isCommandModuleLoading(error){
+  return /CommandNotLoaded|commands? not loaded yet/i.test(errorText(error));
+}
+function constructObjects(name,done,options={}){
+  // evalCommand completes each operation before its effect is checked. A missing
+  // command module throws CommandNotLoadedError and begins its own download.
+  // Only that specific condition is retried; syntax/value failures stop at once.
+  // Do not use asyncEvalCommand: its returned object varies across API bridges.
+  const commands=CASOS[name].construccion;
+  const active=options.active||(()=>true);
+  const schedule=options.schedule||((callback,delay)=>setTimeout(callback,delay));
+  const now=options.now||(()=>Date.now());
+  const progress=options.progress||(()=>{});
+  const deadline=now()+45000;
+  let index=0,waitingAt=-1;
+  function advance(){
+    if(!active())return;
+    while(index<commands.length){
+      if(!active())return;
+      const command=commands[index];
+      progress(index+1,commands.length,command);
+      try{evaluateAndCheck(name,command);}
+      catch(error){
+        if(isCommandModuleLoading(error)&&now()<deadline){
+          if(waitingAt!==index){
+            waitingAt=index;
+            log(name,'⌛ Cargando módulo de GeoGebra para: '+command);
+          }
+          schedule(advance,200);
+          return;
+        }
+        const failure=isCommandModuleLoading(error)?
+          new Error('No terminó de descargarse un módulo de GeoGebra: '+command+'. Revise la conexión y reintente.'):error;
+        log(name,'✗ '+command+' · '+errorText(failure),'bad');
+        done(failure);return;
+      }
+      index++;
+    }
+    done(null);
+  }
+  advance();
+}
+function paint(name){
+  const container=byId('bloques-'+name);
+  CASOS[name].bloques.forEach(block=>{
+    const art=document.createElement('article'); art.className='bloque';art.id=`bl-${name}-${block.id}`;
+    const header=document.createElement('header'), label=document.createElement('div');
+    const title=document.createElement('b');title.textContent=block.objeto;
+    const small=document.createElement('small');small.textContent=block.evento;
+    label.append(title,small);header.append(label);
+    if(block.tipo==='click'){
+      const button=document.createElement('button');button.textContent='Ejecutar';button.disabled=true;
+      button.dataset.run=name+':'+block.id;button.setAttribute('aria-label','Ejecutar '+block.objeto);header.append(button);
+    }else{const auto=document.createElement('small');auto.textContent='automático';header.append(auto);}
+    art.append(header);
+    block.cmds.forEach((command,i)=>{const line=document.createElement('div');line.className='cmd';line.id=art.id+'-'+i;line.textContent=command;art.append(line);});
+    container.append(art);
+  });
+  byId('base-'+name).textContent=CASOS[name].construccion.join('\n');
+}
+function snapshotObserved(name){
+  const st=state(name),g=apps[name];
+  for(const b of CASOS[name].bloques.filter(b=>b.tipo==='update'))
+    for(const target of b.targets)st.seen.set(target,g.getValueString(target));
+}
+function highlight(name,block,count,replay){
+  const st=state(name),ticket=++st.trace;
+  document.querySelectorAll(`#bloques-${name} .activa`).forEach(e=>e.classList.remove('activa'));
+  const show=i=>{
+    if(ticket!==st.trace||i>=count)return;
+    const el=byId(`bl-${name}-${block.id}-${i}`);el.classList.add('activa');
+    setTimeout(()=>{el.classList.remove('activa');if(replay)show(i+1);},replay?320:160);
+  };
+  if(count)show(replay&&!reduced?0:count-1);
+}
+function runBlock(name,id,replay=true){
+  const g=apps[name],st=state(name),block=CASOS[name].bloques.find(b=>b.id===id);
+  if(!g||!block||st.busy||st.phase!=='ready')return false;
+  st.busy=true;
+  let count=0,success=true;
+  log(name,`▶ ${block.objeto} · ${block.evento}`);
+  try{
+    for(let i=0;i<block.cmds.length;i++){
+      const line=byId(`bl-${name}-${id}-${i}`);line.classList.remove('ok','bad');
+      try{checkedCommand(name,block.cmds[i]);line.classList.add('ok');count++;}
+      catch(e){line.classList.add('bad');throw e;}
+    }
+  }catch(e){
+    success=false;
+    if(name==='derivada')g.stopAnimation();
+    status(name,'Ejecución interrumpida. Consulte la consola; use Reiniciar después de corregir el fallo.',true);
+  }finally{
+    // Ignore programmatic updates already handled by the transaction, including reset.
+    snapshotObserved(name); st.busy=false;
+    refresh(name);highlight(name,block,count,replay);
+  }
+  return success;
+}
+function onUpdate(name,block,target){
+  const st=state(name),g=apps[name];
+  if(st.busy||st.phase!=='ready')return;
+  const value=g.getValueString(target);
+  if(st.seen.get(target)===value)return;
+  st.seen.set(target,value);
+  runBlock(name,block.id,false);
+}
+function configure(name){
+  const g=apps[name],c=CASOS[name];
+  g.setCoordSystem(...c.coord);g.setGridVisible(true);g.setAxesVisible(true,true);
+  for(const id of g.getAllObjectNames())g.setVisible(id,false);
+  const visible=name==='derivada'?['f','A','B','s','xB','campoConjetura','botReiniciar','botIniciar','botPausar']:
+    ['n','p','N','kSel','mostrarNormal','mostrarFrec','campoEstim','barTeor','barFrec','botSimular','botReiniciar'];
+  for(const id of visible)g.setVisible(id,true);
+  const pos=(id,x,y)=>{if(!g.exists(id))throw new Error('No existe '+id);g.setCoords(id,x,y);};
+  if(name==='derivada'){
+    const xml=new DOMParser().parseFromString(g.getXML('xB'),'application/xml');
+    const root=xml.documentElement;
+    if(root.tagName!=='element')throw new Error('No se pudo leer la configuración de xB.');
+    let animation=root.querySelector('animation');
+    if(!animation){animation=xml.createElement('animation');root.append(animation);}
+    animation.setAttribute('type','2'); // GeoGebra: decreasing.
+    animation.setAttribute('playing','false');
+    g.evalXML(new XMLSerializer().serializeToString(root));
+    const verify=new DOMParser().parseFromString(g.getXML('xB'),'application/xml');
+    if(verify.querySelector('animation')?.getAttribute('type')!=='2')throw new Error('No se fijó la animación decreciente.');
+    log(name,'✓ Configuración: xB decreciente; parada al llegar a distancia ≤ 0.01.','ok');
+    g.setColor('f',40,80,170);g.setColor('s',230,120,20);g.setColor('t',30,130,60);g.setColor('B',230,120,20);
+    g.setLineThickness('f',5);g.setLineThickness('s',4);g.setLineThickness('t',5);g.setLineStyle('t',1);
+    g.setLabelVisible('f',false);g.setLabelVisible('s',false);g.setLabelVisible('t',false);
+    g.setPointSize('A',5);g.setPointSize('B',5);
+    pos('botReiniciar',16,16);pos('botIniciar',115,16);pos('botPausar',222,16);
+    pos('xB',20,70);pos('campoConjetura',20,535);g.setCaption('campoConjetura','Conjetura: m tiende a');
+    g.setCoords('limTxt',-1.2,-1.2);g.setLabelVisible('limTxt',false);
+  }else{
+    g.setColor('barTeor',40,80,170);g.setColor('barFrec',230,120,20);g.setColor('g',30,130,60);
+    g.setFilling('barTeor',0.55);g.setFilling('barFrec',0.55);g.setLineThickness('g',5);g.setLineStyle('g',1);
+    for(const id of ['barTeor','barFrec','g'])g.setLabelVisible(id,false);
+    pos('botSimular',16,16);pos('botReiniciar',115,16);
+    for(const [id,y]of [['n',65],['p',95],['N',125],['kSel',155]])pos(id,20,y);
+    g.setCaption('kSel','k');g.setLabelStyle('kSel',3);
+    pos('mostrarNormal',300,65);pos('mostrarFrec',300,100);
+    g.setCaption('mostrarNormal','Mostrar normal');g.setCaption('mostrarFrec','Mostrar frecuencias');
+    pos('campoEstim',20,535);g.setCaption('campoEstim','Estimación de P(X ≤ k)');
+  }
+  if(name==='derivada')g.setFixed('a',true,false);
+  for(const id of c.libres)if(!g.isIndependent(id))throw new Error(id+' debe ser libre.');
+}
+function refresh(name){
+  const g=apps[name];if(!g)return;
+  byId('mensaje-'+name).textContent=g.getValueString('mensaje').replace(/^"|"$/g,'');
+  if(name==='derivada'){
+    byId('metricas-'+name).textContent=`xB = ${fmt(g.getValue('xB'))} · m = ${fmt(g.getValue('m'))} · Registros de conjetura: ${g.getValue('intentos')}`;
+    byId('detalle-'+name).textContent=g.getVisible('limTxt',1)?"f′(1) = −0.5. Justifique por qué el límite de las pendientes tiene ese valor.":'Formule su conjetura antes de revelar el límite.';
+    byId('nota-'+name).textContent='La aproximación por un solo lado no prueba la existencia de la derivada. La función cúbica de este caso sí es derivable.';
+  }else{
+    const n=g.getValue('n'),p=g.getValue('p'),sigma=g.getValue('sigma'),tam=g.getValue('tam'),show=g.getValue('mostrarNormal')===1;
+    byId('metricas-'+name).textContent=`n = ${n} · p = ${fmt(p)} · N = ${g.getValue('N')} · Datos de la muestra: ${tam} · μ = ${fmt(g.getValue('mu'))} · σ = ${fmt(sigma)} · Brecha máxima = ${tam?fmt(g.getValue('maxDif')):'— (sin muestra)'}`;
+    byId('detalle-'+name).textContent=`P(X ≤ ${g.getValue('kSel')}) exacta: ${fmt(g.getValue('probAcum'))} · Frecuencia acumulada: ${tam?fmt(g.getValue('frecAcum')):'— (sin muestra)'}${show&&sigma>0?' · Normal con k + 0.5: '+fmt(g.getValue('normalAcum')):''}`;
+    byId('nota-'+name).textContent=!show?'Active la normal para explorar la aproximación.':sigma===0?'σ = 0: la binomial está concentrada en un solo valor. La normal se oculta.':n*p<=5||n*(1-p)<=5?'Advertencia: no se cumple np > 5 y n(1−p) > 5. La curva se muestra para comparar sus limitaciones.':'Se cumple la regla orientativa np > 5 y n(1−p) > 5. Compare siempre el error con la probabilidad exacta.';
+    let peak=0.05;
+    for(let i=1;i<=n+1;i++)peak=Math.max(peak,g.getListValue('teor',i)||0,g.getListValue('frec',i)||0);
+    if(show&&sigma>0)peak=Math.max(peak,1/(sigma*Math.sqrt(2*Math.PI)));
+    const bounds=[-Math.max(2,n*.08),n+Math.max(2,n*.08),-peak*.22,peak*2.25];
+    const key=bounds.join(',');if(state(name).bounds!==key){g.setCoordSystem(...bounds);state(name).bounds=key;}
+  }
+}
+function verifyState(name){
+  const g=apps[name];if(!g||state(name).phase!=='ready')return;
+  const near=(a,b)=>Number.isFinite(a)&&Math.abs(a-b)<1e-8;
+  let failures=0;
+  const check=(ok,desc)=>{log(name,(ok?'✓ Estado: ':'✗ Estado: ')+desc,ok?'ok':'bad');if(!ok)failures++;};
+  CASOS[name].libres.forEach(id=>check(g.isIndependent(id),id+' es libre'));
+  if(name==='derivada'){
+    const b=g.getValue('xB'),a=g.getValue('a');
+    check(b>a&&b<=4,'xB permanece en (a, 4] y evita división por cero');
+    check(near(g.getValue('m'),(b*b+a*b+a*a)/6-1),'m coincide con el cociente incremental de la cúbica');
+    check(near(g.getXcoord('B'),b),'B y xB están sincronizados');
+    const text=g.getValueString('conjetura').replace(/^"|"$/g,'');
+    check(g.getVisible('limTxt',1)===(text.length>0),'la revelación del límite coincide con la conjetura');
+  }else{
+    const n=g.getValue('n'),p=g.getValue('p'),tam=g.getValue('tam');
+    check(g.getValue('largoTeor')===n+1&&g.getValue('largoFrec')===n+1,'las listas contienen n + 1 entradas');
+    check(near(g.getValue('sumaTeor'),1),'las probabilidades suman 1');
+    check(near(g.getValue('mu'),n*p)&&near(g.getValue('sigma')**2,n*p*(1-p)),'media y varianza corresponden a n y p');
+    check(g.getValue('kSel')>=0&&g.getValue('kSel')<=n,'k está entre 0 y n');
+    check(g.getVisible('g',1)===(g.getValue('mostrarNormal')===1&&g.getValue('sigma')>0),'la normal se oculta si σ = 0');
+    if(tam){
+      check(tam===g.getValue('N'),'la muestra tiene N datos');
+      check(near(g.getValue('sumaFrec'),1),'las frecuencias suman 1');
+      const counts=Array(n+1).fill(0);let valid=true;
+      for(let i=1;i<=tam;i++){const value=g.getListValue('datos',i);if(!Number.isInteger(value)||value<0||value>n)valid=false;else counts[value]++;}
+      check(valid&&counts.every((c,k)=>near(c/tam,g.getListValue('frec',k+1))),'cada frecuencia corresponde a la muestra conservada');
+    }else check(near(g.getValue('sumaFrec'),0),'sin simulación: frecuencias cero, sin brecha interpretable');
+  }
+  log(name,failures?`Verificación: ${failures} discrepancia(s).`:'Verificación del estado actual sin discrepancias.',failures?'bad':'ok');
+}
+function loadLibrary(){
+  if(typeof GGBApplet==='function')return Promise.resolve();
+  if(loader)return loader;
+  loader=new Promise((resolve,reject)=>{
+    const script=document.createElement('script');script.src='https://www.geogebra.org/apps/deployggb.js';script.async=true;
+    const timeout=setTimeout(()=>{script.remove();reject(new Error('Tiempo de carga agotado. Compruebe su conexión.'));},45000);
+    script.onload=()=>{clearTimeout(timeout);typeof GGBApplet==='function'?resolve():reject(new Error('GeoGebra no está disponible.'));};
+    script.onerror=()=>{clearTimeout(timeout);script.remove();reject(new Error('No se pudo cargar GeoGebra desde geogebra.org.'));};
+    document.head.append(script);
+  }).catch(e=>{loader=null;throw e;});
+  return loader;
+}
+async function loadCase(name){
+  const st=state(name);if(st.phase==='ready'||st.phase==='loading')return;
+  st.phase='loading';const epoch=++st.epoch;
+  status(name,'Cargando GeoGebra. Puede tardar unos segundos…');
+  document.querySelectorAll(`[data-run^="${name}:"],[data-check="${name}"]`).forEach(b=>b.disabled=true);
+  try{
+    await loadLibrary();
+    if(epoch!==st.epoch)return;
+    if(apps[name]){apps[name].remove();delete apps[name];}
+    byId('ggb-'+name).replaceChildren();
+    const timer=setTimeout(()=>{
+      if(st.phase==='loading'&&epoch===st.epoch){st.phase='error';status(name,'GeoGebra no terminó de cargar. Descargue el HTML y ábralo con internet; puede reintentar.',true);}
+    },45000);
+    new GGBApplet({appName:'classic',id:'ggb_'+name,width:660,height:590,
+      scaleContainerClass:'escala-'+name,autoHeight:true,allowUpscale:false,
+      showToolBar:false,showAlgebraInput:false,showMenuBar:false,perspective:'G',
+      showResetIcon:false,enableRightClick:false,enableShiftDragZoom:false,
+      showZoomButtons:false,showAnimationButton:false,showFullscreenButton:false,
+      language:'es',rounding:'6',errorDialogsActive:false,showLogging:false,
+      appletOnLoad(g){
+        clearTimeout(timer);if(epoch!==st.epoch){g.remove();return;}
+        apps[name]=g;
+        const active=()=>epoch===st.epoch&&apps[name]===g;
+        const fail=error=>{
+          if(!active())return;
+          st.phase='error';g.stopAnimation();
+          log(name,errorText(error),'bad');
+          status(name,'Construcción interrumpida: '+errorText(error),true);
+        };
+        // Let GeoGebra finish its own on-load callback before sending commands.
+        setTimeout(()=>{
+          if(!active())return;
+          try{
+            log(name,'Construcción base · revisión 3 · GeoGebra '+g.getVersion());
+            constructObjects(name,error=>{
+              if(!active())return;
+              if(error){fail(error);return;}
+              try{
+                configure(name);st.phase='ready';
+                if(!runBlock(name,'botReiniciar',false))throw new Error('Falló el reinicio inicial.');
+                for(const block of CASOS[name].bloques.filter(b=>b.tipo==='update'))for(const target of block.targets){
+                  const callback=()=>onUpdate(name,block,target);st.callbacks.push(callback);g.registerObjectUpdateListener(target,callback);
+                }
+                const click=obj=>{const b=CASOS[name].bloques.find(b=>b.tipo==='click'&&b.id===obj);if(b)runBlock(name,b.id);};
+                st.callbacks.push(click);g.registerClickListener(click);
+                document.querySelectorAll(`[data-run^="${name}:"],[data-check="${name}"]`).forEach(b=>b.disabled=false);
+                status(name,'Listo · revisión 3 · GeoGebra '+g.getVersion());verifyState(name);
+              }catch(error){fail(error);}
+            },{active,progress:(step,total)=>status(name,`Construyendo objetos: ${step} de ${total}…`)});
+          }catch(error){fail(error);}
+        },0);
+      }
+    },true).inject('ggb-'+name);
+  }catch(e){st.phase='error';status(name,e.message+' Abra el archivo descargado en un navegador con internet.',true);log(name,e.message,'bad');}
+}
+function selectCase(name){
+  // Pause hidden animations; tabs never start another copy while loading.
+  if(name!=='derivada'&&apps.derivada&&state('derivada').phase==='ready'&&apps.derivada.isAnimationRunning())runBlock('derivada','botPausar',false);
+  document.querySelectorAll('[data-caso]').forEach(b=>{const active=b.dataset.caso===name;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});
+  document.querySelectorAll('.caso').forEach(el=>{const active=el.id==='caso-'+name;el.hidden=!active;el.classList.toggle('activo',active);});
+  loadCase(name);
+}
+document.addEventListener('click',e=>{
+  const tab=e.target.closest('[data-caso]');if(tab)selectCase(tab.dataset.caso);
+  const run=e.target.closest('[data-run]');if(run){const [name,id]=run.dataset.run.split(':');runBlock(name,id);}
+  const retry=e.target.closest('[data-retry]');if(retry){state(retry.dataset.retry).phase='error';loadCase(retry.dataset.retry);}
+  const check=e.target.closest('[data-check]');if(check)verifyState(check.dataset.check);
+  const clear=e.target.closest('[data-clear]');if(clear){byId('consola-'+clear.dataset.clear).replaceChildren();state(clear.dataset.clear).records=[];}
+  const exp=e.target.closest('[data-export]');if(exp){
+    const name=exp.dataset.export,blob=new Blob([state(name).records.join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='Registro_GeoGebra_'+name+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }
+});
+document.querySelector('nav').addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+  e.preventDefault();const name=e.key==='Home'?'derivada':e.key==='End'?'binomial':e.target.dataset.caso==='derivada'?'binomial':'derivada';
+  selectCase(name);byId('tab-'+name).focus();
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&apps.derivada&&state('derivada').phase==='ready'&&apps.derivada.isAnimationRunning())runBlock('derivada','botPausar',false);});
+paint('derivada');paint('binomial');loadCase('derivada');
+
+</script></body></html>
